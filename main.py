@@ -5,7 +5,9 @@ import random
 
 points = newMatrix(4,0)
 transform = identity(newMatrix())
-color = [150, 0, 255]
+color = [0, 0, 0]
 createPixels(600, 600, 255)
-# Uncomment if you want to make the image
 parseFile("script", points, transform, pixels, color)
+# Uncomment if you want to make the image
+# createPixels(1300, 1300, 255)
+# parseFile("kirb", points, transform, pixels, color)

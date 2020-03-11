@@ -105,7 +105,6 @@ def hermite():
 
 def curveCoefficients( p0, p1, p2, p3):
     pMat = newMatrix(4,0)
-    print(p0)
     for p in range (4):
         pSet = [p0, p1, p2, p3]
         pMat.append([pSet[0][p],pSet[1][p],pSet[2][p],pSet[3][p]])

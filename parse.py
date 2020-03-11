@@ -41,6 +41,10 @@ def parseFile( fname, points, transform, screen, color ):
             print("line")
             args = lines[line+1].split(" ")
             addEdge(points, float(args[0]), float(args[1]), float(args[2]), float(args[3]), float(args[4]), float(args[5]))
+        elif lines[line] == "lineinv":
+            print("lineinv")
+            args = lines[line+1].split(" ")
+            addEdge(points, float(args[0]), h - float(args[1]), float(args[2]), float(args[3]), h - float( args[4]), float(args[5]))
         elif lines[line] == "ident":
             print ("ident")
             transform = identity(transform)
@@ -66,22 +70,27 @@ def parseFile( fname, points, transform, screen, color ):
             args = lines[line+1].split(" ")
             args = [int(i) for i in args]
             addCurve(points, int(args[0]), args[1], args[2], args[3], args[4], args[5], args[6], args[7], 0.01, "bezier")
+        elif lines[line] == "bezierinv":
+            args = lines[line+1].split(" ")
+            args = [int(i) for i in args]
+            addCurve(points, int(args[0]), h - args[1], args[2], h - args[3], args[4], h - args[5], args[6], h - args[7], 0.05, "bezier")
         elif lines[line] == "hermite":
             args = lines[line+1].split(" ")
+            args = [float(i) for i in args]
             args = [int(i) for i in args]
             addCurve(points, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], 0.01, "hermite")
         elif lines[line] == "apply":
             print("apply")
-            clearpixels()
             printMatrix(transform)
             printMatrix(points)
             matrixMulti(transform, points)
+        elif lines[line] == "display":
+            clearpixels()
             for i in range(0, len(points)):
                 for x in range(0, len(points[i])):
                     points[i][x] = int(points[i][x])
             printMatrix(points)
             drawEdges(points, color)
-        elif lines[line] == "display":
             display()
         elif lines[line] == "save":
             args = lines[line+1].split(" ")

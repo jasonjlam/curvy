@@ -131,8 +131,6 @@ def addCurve (matrix, x0, y0, x1, y1, x2, y2, x3, y3, step, type):
             for  n in range(4):
                 x += stepMat[n] * coeffMat[m][n]
             points.append(x)
-        print(step * i)
-        print((i+1) * step)
         coeffMat = curveCoefficients([x0, y0, 0, 1], [x1, y1, 0, 1], [x2, y2, 0, 1], [x3, y3, 0, 1])
         matrixMulti(curveMat, coeffMat)
         stepMat = [((i+1) * step) **3, ((i+1) *step) **2, ((i+1) * step), 1]
@@ -141,9 +139,8 @@ def addCurve (matrix, x0, y0, x1, y1, x2, y2, x3, y3, step, type):
             for n in range(4):
                 x += stepMat[n] * coeffMat[m][n]
             points.append(x)
-        print(points)
         addEdge(matrix, points[0], points[1], 0, points[4], points[5], 0)
-        
+
 def saveExtension(fname ):
     ppmName = fname[:fname.find('.')] + '.ppm'
     writeImage(ppmName)
@@ -154,6 +151,6 @@ def saveExtension(fname ):
 def display():
     ppmName = 'pic.ppm'
     writeImage(ppmName )
-    p = Popen( ['imdisplay', ppmName], stdin=PIPE, stdout = PIPE )
+    p = Popen( ['display', ppmName], stdin=PIPE, stdout = PIPE )
     p.communicate()
     remove(ppmName)
